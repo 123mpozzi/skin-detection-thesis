@@ -1,0 +1,45 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Conclusion}\label{chap:conclusion}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% cosa è stato fatto
+In this thesis the significance and limitations of skin detection have been addressed.
+A review of public datasets available in the domain and an analysis of state-of-the-art approaches has been presented, including a new proposed taxonomy.
+Three different state-of-the-art methods have been thoroughly examined implemented and validated in respect to the original papers, when possible.
+An evaluation of the chosen approaches in different settings has been presented, alongside a discussion on the metrics used in the domain.
+Finally, the results have been thoroughly discussed through data and figures.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Discussion}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% cosa è risultato
+The analysis of the evaluation results has pointed out the strengths and weaknesses of each of the chosen approaches.\\
+The thresholding method reported the worst classification scores but described inference times dozens of times faster on the CPU.
+Moreover, its prediction time resulted independent of image pixels.
+The prediction is inaccurate when the images have dark skin tones and backgrounds with skin-like colors.\\
+The statistical approach reported better results, but was prone to several False Positives.
+Being color-based, it also shared some limitations with the thresholding approach: materials with skin-like colors have represented a challenge to classify.\\
+The U-Net approach has always reported the best scores.
+It demonstrated how deep learning is able to find features other than color to be able to classify skin pixels even in tricky situations.
+It struggled to generalize in two cases: when the training dataset was very small and when the training data was too different from the test data.\\
+The involvement of more balanced metrics has proven to be essential to clarify situations where other metrics described over-optimistic results.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Future Work}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Skin detection approaches have evolved in multiple paths, covering aspects such as classification performance and computational efficiency.
+However, skin detection datasets still represent a major limitation in the development and evaluation of skin detectors.
+New datasets are still highly sought after and could represent a significant boost in the skin detection domain.
+
+In future evaluations, it should be taken into account the metric behavior and its limitations.
+Metrics that describe a more stable behavior on unbalanced datasets can be involved to represent results in a more complete way.
+
+Finally, the development of skin detectors could benefit from the progress that image segmentation is having with deep learning, especially in the medical field, which often features binary classification problems.\\
+For achieving better classifications, Transformers could be considered, as they have proven to be really solid in Natural Language Processing~\cite{vaswani2017attention}, and are starting to gain traction in the image segmentation tasks, so much that some U-Net-like architectures have been recently designed~\cite{cao2021swin, chen2021transunet}.\\
+Regarding performance and computational powers, skin detectors could venture into mobile deep learning development.
+In fact, mobile phones, are starting to become a solid platform for U-Nets~\cite{ignatov2021fast}.

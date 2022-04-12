@@ -1,0 +1,173 @@
+% latex-mimosis has been used as the thesis template
+% https://github.com/Pseudomanifold/latex-mimosis
+% Which is under the following LICENSE:
+
+% Copyright (c) 2018 Bastian Rieck
+% 
+% Permission is hereby granted, free of charge, to any person obtaining a copy
+% of this software and associated documentation files (the "Software"), to deal
+% in the Software without restriction, including without limitation the rights
+% to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+% copies of the Software, and to permit persons to whom the Software is
+% furnished to do so, subject to the following conditions:
+% 
+% The above copyright notice and this permission notice shall be included in all
+% copies or substantial portions of the Software.
+% 
+% THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+% IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+% FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+% AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+% SOFTWARE.
+\documentclass{mimosis}
+
+\usepackage{metalogo}
+
+\emergencystretch=1em % overfull hboxes of bibliography
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Some of my favourite personal adjustments
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% These are the adjustments that I consider necessary for typesetting
+% a nice thesis. However, they are *not* included in the template, as
+% I do not want to force you to use them.
+
+% This ensures that I am able to typeset bold font in table while still aligning the numbers
+% correctly.
+\usepackage{etoolbox}
+
+\usepackage[binary-units=true]{siunitx}
+\DeclareSIUnit\px{px}
+
+\sisetup{%
+  detect-all           = true,
+  detect-family        = true,
+  detect-mode          = true,
+  detect-shape         = true,
+  detect-weight        = true,
+  detect-inline-weight = math,
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Hyperlinks & bookmarks
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[%
+  colorlinks = true,
+  %colorlinks = false, % for printing
+  citecolor  = RoyalBlue,
+  linkcolor  = RoyalBlue,
+  urlcolor   = RoyalBlue,
+  unicode,
+  ]{hyperref}
+
+\usepackage{bookmark}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Bibliography
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% I like the bibliography to be extremely plain, showing only a numeric
+% identifier and citing everything in simple brackets. The first names,
+% if present, will be initialized. DOIs and URLs will be preserved.
+
+\usepackage[%
+  autocite     = plain,
+  backend      = biber,
+  doi          = true,
+  url          = true,
+  giveninits   = true,
+  hyperref     = true,
+  maxbibnames  = 99,
+  maxcitenames = 99,
+  sorting      = none, % sort by appareance
+  style        = numeric,
+  ]{biblatex}
+
+\input{bibliography-mimosis}
+\addbibresource{Thesis.bib}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Fonts
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\ifxetexorluatex
+  \setmainfont{Minion Pro}
+\else
+  \usepackage[lf]{ebgaramond}
+  \usepackage[oldstyle,scale=0.7]{sourcecodepro}
+  \singlespacing
+\fi
+
+\renewcommand{\th}{\textsuperscript{\textup{th}}\xspace}
+
+\makeindex
+\makeglossaries
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Incipit
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{enumerate} % List of steps
+\usepackage{placeins} % Floatbarrier
+
+%subfigures
+\usepackage{caption}
+\usepackage{subcaption}
+
+\usepackage{svg} % to include SVGs
+\usepackage{pdfpages} % to include PDFs (title)
+
+% custom commands
+\newcommand{\q}[1]{``#1''} % quote command
+\newcommand{\monosp}[1]{$#1$} % monospace math
+\newcommand{\monobold}[1]{\pmb{#1}} % monospace math bold
+
+
+
+%% DOCUMENT START
+
+\begin{document}
+
+
+% HEADINGS
+
+\frontmatter
+  \include{Sources/0_Title}
+  \include{Sources/0_Abstract}
+  \include{Sources/0_Acknowledgements}
+
+  \tableofcontents
+
+
+% CONTENT
+
+\mainmatter
+
+  \include{Sources/1_Introduction}
+  \include{Sources/2_Datasets}
+  \include{Sources/3_Methods}
+  \include{Sources/4_Results}
+  \include{Sources/5_Conclusion}
+
+% This ensures that the subsequent sections are being included as root
+% items in the bookmark structure of your PDF reader.
+\bookmarksetup{startatroot}
+\backmatter
+
+  \printindex
+  \printbibliography
+
+\end{document}
+
+
+
+%% POSSIBLE FIXES
+% language, grammar, repetitions
+% remove indentations after floats and formulas
+% check warnings
+% check citation indexes
+% fix math mode for numbers in text
